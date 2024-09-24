@@ -1,4 +1,4 @@
-# Doc de la DOc
+# Doc de la Doc
 
 
 ## 1. Objectif
@@ -20,5 +20,5 @@
 
 ## Ancre
 
-**Description :** Régulièrement des ancres sont déposé dans la documentation. Exemple [Ancre](./doc_de_la_doc.md#ancre). Les ancres permettent d'accéder à une fonctionnalité déjà expliqué, cela évite la répetition.
+**Description :** Régulièrement des ancres sont déposé dans la documentation. Exemple [Ancre](./README.md#ancre). Les ancres permettent d'accéder à une fonctionnalité déjà expliqué, cela évite la répetition.
 
