@@ -1,21 +1,21 @@
 # Objectif
 
-Nous devons crée un utilisateur et de le mettre dans la base de donnée. Il est nécessaire de faire en sorte de récupérer les données envoyé du front, les traités et les comparer pour créer un utilisateur ou renvoyer une erreur.
+Nous devons créer un utilisateur et le mettre dans la base de données. Il est nécessaire de faire en sorte de récupérer les données envoyées du front, les traiter et les comparer pour créer un utilisateur ou renvoyer une erreur.
 
 
 ## Réalisation
 
 Nous devons lire l'objet JSON envoyé par le front et vérifié que tout est en l'ordre. 
-Il est essentiel de décodé du JSON et le mettre dans une structure go. Ce qui permettra de vérifier la concordance des deux mots de passes, le format de celui-ci et si il y'a des zones vides dans les parties obligatoires : mail, mot de passe, prénom, nom de famille et date de naissance.
+Il est essentiel de décoder du JSON et de le mettre dans une structure go. Ce qui permettra de vérifier la concordance des deux mots de passe, le format de celui-ci et s'il y'a des zones vides dans les parties obligatoires : mail, mot de passe, prénom, nom de famille et date de naissance.
 Si tout est en ordre nous créons un UID et cryptons le mot de passe. Il faudra également vérifier si l'email est utilisé par un autre utilisateur dans la DB. 
-Ensuite les données sont insérer dans deux tables différentes. Une qui contient les informations de base et une pour l'authentification.
+Ensuite les données sont insérées dans deux tables différentes. Une qui contient les informations de base et une pour l'authentification.
 Enfin nous devons envoyé la réponse au front tout en générant un JWT avec la table AUTH.
 
 
 ## Conception
 
 
-Nous devons recrée une structure pour ajouter une méthode et lire le body de la requête.
+Nous devons recréer une structure pour ajouter une méthode et lire le body de la requête.
 ```go
 nw := model.ResponseWriter{
 	ResponseWriter: w,
@@ -34,7 +34,7 @@ json.Unmarshal(body, &register.Auth)
 ```
 
 
-Ensuite nous vérifions avec la fonction importé si touts les champs obligatoires sont remplies correctement.
+Ensuite nous vérifions avec la fonction importée si tous les champs obligatoires sont remplis correctement.
 ```go
 if err := utils.RegisterVerification(register); err != nil {
 	nw.Error(err.Error())
@@ -44,7 +44,7 @@ if err := utils.RegisterVerification(register); err != nil {
 ```
 
 
-La fonction RegisterVerification assure que les conditions pour s’inscrire sont réunis. Voir les commentaires //.
+La fonction RegisterVerification assure que les conditions pour s’inscrire sont réunies. Voir les commentaires //.
 ```go
 func RegisterVerification(register model.Register) error {
 
@@ -58,7 +58,7 @@ func RegisterVerification(register model.Register) error {
 		return errors.New("incorrect password ! the password must contain    characters, 1 uppercase letter, 1 special character, 1 number")
 	}
 
-// Vérifie que les champs obligatoires ne sont vide
+// Vérifie que les champs obligatoires ne sont pas vides
 	if register.Auth.Email == "" || register.Auth.Password == "" || register.FirstName == "" || register.LastName == "" || register.BirthDate == "" {
 		return errors.New("there is an empty field")
 	}
@@ -68,7 +68,7 @@ return nil
 ```
 
 
-Une autre fonction est appelé et crée un UID et crypte le mot de passe.
+Une autre fonction est appelée et crée un UID et crypte le mot de passe.
 ```go
 if err := utils.CreateUuidAndCrypt(&register); err != nil {
 	nw.Error(err.Error())
@@ -76,7 +76,7 @@ if err := utils.CreateUuidAndCrypt(&register); err != nil {
 	return
 }
 ```
-Les fonctionnalités des  bibliothèques uuid et crypto sont utilisé, voir les commentaires //.
+Les fonctionnalités des  bibliothèques uuid et crypto sont utilisées, voir les commentaires //.
 ```go
 func CreateUuidAndCrypt(register *model.Register) error {
 
@@ -281,7 +281,7 @@ if err := utils.InsertIntoDb("UserInfo", db, register.Auth.Id, register.Auth.Ema
 }
 ```
 
-La fonction go importé est InsertIntoDb, elle nous permet de remplir la base de donnée.
+La fonction go importée est InsertIntoDb, elle nous permet de remplir la base de donnée.
 
 ```go 
 func InsertIntoDb(tabelName string, db *sql.DB, Args ...any) error {
@@ -307,7 +307,8 @@ func InsertIntoDb(tabelName string, db *sql.DB, Args ...any) error {
 }
 ```
 
-L'utilisateur est enfin crée, un JWT est envoyé du back vers le front et la session est crée. Pour plus d'information sur les [JWT](./login.md#ancre-jwt).
+L'utilisateur est enfin crée dans la base de donnée, un JWT est envoyé du back vers le front et la session est crée. Pour plus d'information sur les [JWT](./login.md#ancre-jwt).
+
 ```go
 	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(map[string]any{

@@ -3,12 +3,12 @@
 
 ## 1. Objectif
 
-**Description :** Définir les objectifs de la technologie ou l’attente du client. Ecpliciter ce qu’on cherche à accomplir avec cette partie du projet.
+**Description :** Définir les objectifs de la technologie ou l’attente du client. Expliquer ce qu’on cherche à accomplir avec cette partie du projet.
 
 
 ## 2. Réalisation
 
-**Description :** Détails sur la mise en œuvre et la mise en œuvre  de la technologie . Décrire comment il fonctionne et interagit avec d'autres éléments. Les points clés, la méthodologie etc … 
+**Description :** Détails sur la mise en œuvre et la mise en œuvre de la technologie. Décrire comment il fonctionne et interagit avec d'autres éléments. Les points clés, la méthodologie etc.
 ( sans code )
 
 
@@ -20,5 +20,5 @@
 
 ## Ancre
 
-**Description :** Régulièrement des ancres sont déposé dans la documentation. Exemple [Ancre](./README.md#ancre). Les ancres permettent d'accéder à une fonctionnalité déjà expliqué, cela évite la répetition.
+**Description :** Régulièrement des ancres sont déposé dans la documentation. Exemple [Ancre](./README.md#ancre). Les ancres permettent d'accéder à une fonctionnalité déjà expliquée; cela évite la répétition.
 
