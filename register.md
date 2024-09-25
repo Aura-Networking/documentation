@@ -1,3 +1,6 @@
+# Registerter
+
+
 # Objectif
 
 Nous devons créer un utilisateur et le mettre dans la base de données. Il est nécessaire de faire en sorte de récupérer les données envoyées du front, les traiter et les comparer pour créer un utilisateur ou renvoyer une erreur.
@@ -77,6 +80,9 @@ if err := utils.CreateUuidAndCrypt(&register); err != nil {
 }
 ```
 Les fonctionnalités des  bibliothèques uuid et crypto sont utilisées, voir les commentaires //.
+
+##### Ancre Bcrypt
+
 ```go
 func CreateUuidAndCrypt(register *model.Register) error {
 
@@ -116,6 +122,8 @@ func CreateUuidAndCrypt(register *model.Register) error {
 	return nil
 }
 ```
+
+##### Fin Ancre Bcrypt
 
 
 Il nous faut également manipuler la DB pour vérifier si le mail est déja utilisé par un autre utilisateur :
